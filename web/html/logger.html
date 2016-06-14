@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logger</title>
+    <link  rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+    <link  rel="stylesheet" type="text/css" href="../css/sender.css">
+    <link  rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-theme.min.css">
+    <link  rel="stylesheet" type="text/css" href="../bootstrap/bootstrap-calendar/css/calendar.css">
+    <link  rel="stylesheet" type="text/css" href="../css/dashboard.css">
+    <link  rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.css">
+
+
+    <script src="../js/jquery-2.2.4.js"></script>
+    <script src="../bootstrap/bootstrap-calendar/js/language/ru-RU.js"></script>
+    <script src="../bootstrap/underscore/underscore-min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/bootstrap-calendar/js/calendar.js"></script>
+    <script src="../js/sender.js"></script>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            color: #555;
+            background: #ececec;
+            margin-top:20px;
+        }
+
+        .project-list > tbody > tr > td {
+            padding: 12px 8px;
+        }
+
+        .project-list > tbody > tr > td .avatar {
+            width: 22px;
+            border: 1px solid #CCC;
+        }
+    </style>
+</head>
+<body>
+<div w3-include-html="nav.html"></div>
+<div class="container bootstrap snippet">
+    <div class="table-responsive">
+        <!-- PROJECT TABLE -->
+        <table class="table colored-header datatable project-list">
+            <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Дата</th>
+                <th>Час</th>
+                <th>Користувач</th>
+                <th>Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><a href="#">Клієнтська розсилка</a></td>
+                <td>14-06-2016</td>
+                <td>15:30:10</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            <tr>
+                <td><a href="#">Корпоративна розсилка</a></td>
+                <td>9-06-2016</td>
+                <td>11:18:10</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            <tr>
+                <td><a href="#">Подію заплановано</a></td>
+                <td>5-06-2016</td>
+                <td>8:30:03</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            <tr>
+                <td><a href="#">Клієнтська розсилка</a></td>
+                <td>3-06-2016</td>
+                <td>12:59:09</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            <tr>
+                <td><a href="#">Подію заплановано</a></td>
+                <td>1-06-2016</td>
+                <td>11:30:10</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            <tr>
+                <td><a href="#">Корпоративна розсилка</a></td>
+                <td>22-05-2016</td>
+                <td>8:10:19</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            <tr>
+                <td><a href="#">Клієнтська розсилка</a></td>
+                <td>21-05-2016</td>
+                <td>10:15:29</td>
+                <td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                <td><span class="label label-success">ОК</span></td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- END PROJECT TABLE -->
+    </div>
+</div>
+<script>
+    w3IncludeHTML();
+</script>
+</body>
+</html>

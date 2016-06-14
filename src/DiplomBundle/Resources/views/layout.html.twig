@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link  rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.css') }}">
+        <link  rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}">
+        <link  rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.css') }}">
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    {% block header %}
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('diplom_default_index') }}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="clients.html">Клієнти</a></li>
+                        <li><a href="users.html">Працівники</a></li>
+                        <li><a href="sender.html">Розсилання</a></li>
+                        <li><a href="logger.html">Логи</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 5px;!important;">
+                                <img src="../img/users_pic/admin.jpg" class="img-circle width-45" alt="">{{ app.user.username }}<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Переглянути особисті дані</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">Вийти</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" id="search" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-2.2.4.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
+</html>

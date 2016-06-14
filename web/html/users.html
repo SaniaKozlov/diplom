@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link  rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+    <link  rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-theme.min.css">
+    <link  rel="stylesheet" type="text/css" href="../bootstrap/bootstrap-calendar/css/calendar.css">
+    <link  rel="stylesheet" type="text/css" href="../css/dashboard.css">
+    <link  rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.css">
+
+
+    <script src="../js/jquery-2.2.4.js"></script>
+    <!--<script src="../bootstrap/bootstrap-calendar/js/app.js"></script>-->
+    <script src="../bootstrap/bootstrap-calendar/js/language/ru-RU.js"></script>
+    <script src="../bootstrap/underscore/underscore-min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/bootstrap-calendar/js/calendar.js"></script>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+</head>
+<body>
+<div w3-include-html="nav.html"></div>
+<hr>
+<div class="col-md-10 col-md-offset-1">
+    <h1>Працівники</h1>
+</div>
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                            <tr>
+                                <th><span>Ім’я</span></th>
+                                <th><span>Дата створення</span></th>
+                                <th class="text-center"><span>Посада</span></th>
+                                <th><span>Email</span></th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <img src="../img/users_pic/admin.jpg" class="img-circle width-80" alt="">
+                                    <a href="#" class="user-link">Іванов Іван Іванович</a>
+                                    <span class="user-subhead"></span>
+                                </td>
+                                <td>2016/04/12</td>
+                                <td class="text-center">
+                                    <span class="label label-default">Адміністратор</span>
+                                </td>
+                                <td>
+                                    <a href="#">ivanov.i@gmail.com</a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="../img/users_pic/worker.jpg" class="img-circle width-80" alt="">
+                                    <a href="#" class="user-link">Петров Петро</a>
+                                    <span class="user-subhead"></span>
+                                </td>
+                                <td>2016/05/29</td>
+                                <td class="text-center">
+                                    <span class="label label-success">Директор</span>
+                                </td>
+                                <td>
+                                    <a href="#">petrov.p@gmail.com</a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="../img/users_pic/worker_g.jpg" class="img-circle width-80" alt="">
+                                    <a href="#" class="user-link">Іванова Ірина</a>
+                                    <span class="user-subhead"></span>
+                                </td>
+                                <td>2016/06/12</td>
+                                <td class="text-center">
+                                    <span class="label label-danger">Заступник директора</span>
+                                </td>
+                                <td>
+                                    <a href="#">abc@brando.com</a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    w3IncludeHTML();
+</script>
+</body>
+</html>
