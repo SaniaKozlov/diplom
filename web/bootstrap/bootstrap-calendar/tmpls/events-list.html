@@ -7,6 +7,7 @@
 				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
 					data-event-class="<%= event['class'] %>" class="event-item">
 					<%= event.title %></a>
+				<a href="#" id="removeEvent" style="float: right" data-id="<%= event.id %>">X</a>
 			</li>
 		<% }) %>
 	</ul>
