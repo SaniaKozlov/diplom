@@ -3,6 +3,7 @@
 namespace DiplomBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Client
@@ -34,6 +35,13 @@ class Client
      * @ORM\Column(name="createed", type="datetime")
      */
     private $createed;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birth", type="datetime")
+     */
+    private $birth;
 
     /**
      * @var \DateTime
@@ -76,7 +84,21 @@ class Client
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
-    
+
+
+    public function toArray(){
+        $nameArr = explode(' ', $this->getName());
+        return [
+            'id' => $this->getId(),
+            'name' => $nameArr[0],
+            'lastname' => $nameArr[1],
+            'email' => $this->getEmail(),
+            'image' => $this->getImage(),
+            'birth' => $this->getBirth()->format('d-m-Y'),
+            'phone' => $this->getPhone()
+        ];
+    }
+
     /**
      * Get id
      *
@@ -109,6 +131,30 @@ class Client
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set createed
+     *
+     * @param \DateTime $createed
+     *
+     * @return Client
+     */
+    public function setBirth($birth)
+    {
+        $this->birth = $birth;
+
+        return $this;
+    }
+
+    /**
+     * Get createed
+     *
+     * @return \DateTime
+     */
+    public function getBirth()
+    {
+        return $this->birth;
     }
 
     /**
