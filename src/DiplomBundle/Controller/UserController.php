@@ -5,9 +5,11 @@ namespace DiplomBundle\Controller;
 use DiplomBundle\Entity\User;
 use DiplomBundle\Exception\WrongDateException;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -77,18 +79,60 @@ class UserController extends Controller
      * @return Response
      */
     public function remove(Request $request, $id) {
+        $em = $this->get('doctrine.orm.default_entity_manager');
+
+        $user = $em->find('DiplomBundle:User', $id);
+        if ($user === null) {
+            $this->get('session')->getFlashBag()->add('error', 'Користувача не знайдено');
+            return $this->redirectToRoute('user.list');
+        }
+
+        $em->remove($user);
+        $em->flush();
 
         return $this->redirectToRoute('user.list');
     }
 
     /**
-     * @Route("/edit/{id}", name="user.edit")
+     * @Route("/edit/{id}", name="user.edit.get")
+     * @Method({"GET"})
+     * @param Request $request
+     * @param integer $id
+     * @return JsonResponse|Response
+     */
+    public function editGET(Request $request, $id) {
+        $em = $this->get('doctrine.orm.default_entity_manager');
+        $user = $em->find('DiplomBundle:User', $id);
+        if ($user === null) {
+            $this->get('session')->getFlashBag()->add('error', 'Користувача не знайдено');
+            return $this->redirectToRoute('user.list');
+        }
+
+        return new JsonResponse(['user' => $user->toArray()]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="user.edit.save")
+     * @Method({"POST"})
      * @param Request $request
      * @param integer $id
      * @return Response
      */
-    public function edit(Request $request, $id) {
+    public function editPOST(Request $request, $id) {
+        $em = $this->get('doctrine.orm.default_entity_manager');
+        $user = $em->find('DiplomBundle:User', $id);
+        if ($user === null) {
+            $this->get('session')->getFlashBag()->add('error', 'Користувача не знайдено');
+            return $this->redirectToRoute('user.list');
+        }
 
+        $data = $request->request->all();
+        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+        $user->fillFormData($data, $encoder);
+
+        $em->persist($user);
+        $em->flush();
+        
         return $this->redirectToRoute('user.list');
     }
 }

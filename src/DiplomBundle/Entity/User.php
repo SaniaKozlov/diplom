@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 26.05.16
- * Time: 13:03
- */
 
 namespace DiplomBundle\Entity;
-
 
 use DiplomBundle\Exception\WrongDateException;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +11,7 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 /**
  * @ORM\Entity(repositoryClass="DiplomBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
 {
@@ -64,12 +58,41 @@ class User extends BaseUser
      */
     private $image;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime")
+     */
+    private $updated;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate() {
+        $this->updated = new \DateTime();
+    }
+
 
     public function __construct()  {
         parent::__construct();
 
         $this->permissions = new ArrayCollection();
-        $this->image = __DIR__ . '/../../../web/img/users_pic/user_g1.png';
+        $this->image = __DIR__ . '/../../../web/img/users_pic/user_m1.png';
     }
 
     /**
@@ -81,7 +104,7 @@ class User extends BaseUser
     public function fillFormData($data, $passwordEncoder) {
         $this->setName($data['name']);
         $this->setSurname($data['surname']);
-        $this->setBirthdate($data['birthdate']);
+        $this->setBirthdate(new \DateTime($data['birthdate']));
         $this->setPhone($data['phone']);
         $this->setUsername($data['login']);
         $this->setEmail($data['email']);
@@ -89,9 +112,25 @@ class User extends BaseUser
         $this->setExpiresAt((new \DateTime())->modify('+5 years'));
         $this->setPassword($passwordEncoder->encodePassword($data['password'], $this->getSalt()));
         $this->setImage($data['image']);
+        $this->addRole('ROLE_USER');
 
         return $this;
     }
+
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'login' => $this->getUsername(),
+            'name' => $this->getName(),
+            'surname' => $this->getSurname(),
+            'phone' => $this->getPhone(),
+            'email' => $this->getEmail(),
+            'birthdate' => $this->getBirthdate()->format(\DateTime::ISO8601),
+            'created' => $this->getCreated()->format(\DateTime::ISO8601),
+            'updated' => $this->getUpdated()->format(\DateTime::ISO8601),
+        ];
+    }
+
 
 
     /**
@@ -246,5 +285,53 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return User
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     *
+     * @return User
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }
