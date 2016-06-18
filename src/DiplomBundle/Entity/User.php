@@ -92,7 +92,7 @@ class User extends BaseUser
         parent::__construct();
 
         $this->permissions = new ArrayCollection();
-        $this->image = __DIR__ . '/../../../web/img/users_pic/user_m1.png';
+        $this->image = '/img/users_pic/user_m1.png';
     }
 
     /**
@@ -111,7 +111,7 @@ class User extends BaseUser
         $this->setEnabled(true);
         $this->setExpiresAt((new \DateTime())->modify('+5 years'));
         $this->setPassword($passwordEncoder->encodePassword($data['password'], $this->getSalt()));
-        $this->setImage($data['image']);
+        $this->setImage('/' . $data['image']);
         $this->addRole('ROLE_USER');
 
         return $this;
@@ -125,9 +125,10 @@ class User extends BaseUser
             'surname' => $this->getSurname(),
             'phone' => $this->getPhone(),
             'email' => $this->getEmail(),
-            'birthdate' => $this->getBirthdate()->format(\DateTime::ISO8601),
-            'created' => $this->getCreated()->format(\DateTime::ISO8601),
-            'updated' => $this->getUpdated()->format(\DateTime::ISO8601),
+            'birthdate' => $this->getBirthdate()->format('d/m/Y'),
+            'created' => $this->getCreated()->format('d/m/Y'),
+            'updated' => $this->getUpdated()->format('d/m/Y'),
+            'image'   => $this->getImage(),
         ];
     }
 
