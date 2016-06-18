@@ -55,15 +55,25 @@ class ClientController extends Controller
      */
     public function editAction($id, Request $request){
         if($request->getMethod() == "POST"){
-
+            $data = $request->request->all();
+            $em = $this->getDoctrine()->getManager();
+            $client = $em->getRepository('DiplomBundle:Client')->find($id);
+            $client->setName($data['name'].' '.$data['lastname']);
+            $client->setUpdated(new \DateTime('now'));
+            $client->setEmail($data['email']);
+            $client->setPhone($data['ipn']);
+            $client->setAddress($data['birth']);
+            $client->setImage($data['image']);
+            $client->setBirth(new \DateTime($data['birth']));
+            $em->persist($client);
+            $em->flush();
+            return $this->redirect($this->generateUrl('diplom_client_index'));
         } else {
             $em = $this->getDoctrine()->getManager();
             $client = $em->getRepository('DiplomBundle:Client')->find($id);
             $response = new Response(json_encode(array("result" => $client->toArray())));
             $response->headers->set('Content-Type', 'application/json');
-
             return $response;
-//            return new Response(json_encode($client->toArray()));
         }
     }
 
@@ -75,6 +85,7 @@ class ClientController extends Controller
         $client = $em->getRepository('DiplomBundle:Client')->find($id);
         $em->remove($client);
         $em->flush();
+        return $this->redirect($this->generateUrl('diplom_client_index'));
     }
 
     /**
@@ -83,6 +94,8 @@ class ClientController extends Controller
     public function infoAction($id){
         $em = $this->getDoctrine()->getManager();
         $client = $em->getRepository('DiplomBundle:Client')->find($id);
-        return $this->render('@Diplom/client/index.html.twig', array('client' => $client));
+        $response = new Response(json_encode(array("result" => $client->toArray())));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

@@ -95,7 +95,9 @@ class Client
             'email' => $this->getEmail(),
             'image' => $this->getImage(),
             'birth' => $this->getBirth()->format('d-m-Y'),
-            'phone' => $this->getPhone()
+            'phone' => $this->getPhone(),
+            'created' => $this->getCreateed()->format('d-m-Y h:i:s'),
+            'updated' => $this->getUpdated()->format('d-m-Y h:i:s')
         ];
     }
 
