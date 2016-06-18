@@ -3,8 +3,10 @@
 namespace DiplomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Finder\Finder;
 /**
- * @Route("/clients")
+ * @Route("/client")
  */
 class ClientController extends Controller
 {
@@ -13,9 +15,15 @@ class ClientController extends Controller
      */
     public function indexAction()
     {
+        $finder = new Finder();
+        $finder->files()->in(realpath($this->get('kernel')->getRootDir() . '/../web/img/users_pic'));
+        $images = [];
+        foreach ($finder as $file) {
+            $images[$file->getRelativePathname()] = 'img/users_pic/'.$file->getRelativePathname();
+        }
         $em = $this->getDoctrine()->getManager();
         $clients = $em->getRepository('DiplomBundle:Client')->findAll();
-        return $this->render('@Diplom/client/index.html.twig', array('clients' => $clients));
+        return $this->render('@Diplom/client/index.html.twig', array('clients' => $clients, 'images' => $images));
     }
 
     /**

@@ -28,15 +28,17 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="clients.html">Клієнти</a></li>
-                        <li><a href="users.html">Працівники</a></li>
-                        <li><a href="sender.html">Розсилання</a></li>
-                        <li><a href="logger.html">Логи</a></li>
+                        <li><a href="{{ path('diplom_client_index') }}">Клієнти</a></li>
+                        <li><a href="{{ path('diplom_user_index') }}">Працівники</a></li>
+                        <li><a href="{{ path('diplom_sender_index') }}">Розсилання</a></li>
+                        <li><a href="{{ path('diplom_logger_index') }}">Логи</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 5px;!important;">
+                                {% if app.user %}
                                 <img src="../img/users_pic/admin.jpg" class="img-circle width-45" alt="">{{ app.user.username }}<span class="caret"></span>
+                                {% endif %}
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Переглянути особисті дані</a></li>
