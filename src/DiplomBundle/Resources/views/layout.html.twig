@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="{{ path('diplom_client_index') }}">Клієнти</a></li>
-                        <li><a href="{{ path('diplom_user_index') }}">Працівники</a></li>
+                        <li><a href="{{ path('user.list') }}">Працівники</a></li>
                         <li><a href="{{ path('diplom_sender_index') }}">Розсилання</a></li>
                         <li><a href="{{ path('diplom_logger_index') }}">Логи</a></li>
                     </ul>
@@ -57,6 +57,28 @@
             </div><!-- /.container-fluid -->
         </nav>
     {% endblock %}
+
+    <div class="container-fluid">
+        {% block flashbag %}
+            <div class="row">
+                <div class="col-xs-12">
+                    {% for message in app.session.flashbag.get('error') %}
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <p>{{ message }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block content %}
+
+        {% endblock %}
+    </div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/jquery-2.2.4.js') }}"></script>

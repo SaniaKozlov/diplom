@@ -2,10 +2,14 @@
 
 namespace DiplomBundle\Controller;
 
+use DiplomBundle\Entity\User;
+use DiplomBundle\Exception\WrongDateException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/user")
@@ -13,7 +17,7 @@ use Symfony\Component\Finder\Finder;
 class UserController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="user.list")
      */
     public function indexAction()
     {
@@ -32,5 +36,59 @@ class UserController extends Controller
             'images' => $images,
             'users'  => $users
         ]);
+    }
+
+    /**
+     * @Route("/add", name="user.add")
+     * @param Request $request
+     * @return Response
+     */
+    public function add(Request $request) {
+        $em = $this->get('doctrine.orm.default_entity_manager');
+        $repo = $em->getRepository('DiplomBundle:User');
+        $data = $request->request->all();
+        
+        $user = $repo->findByEmail($data['email']);
+        if ($user !== null) {
+            $this->get('session')->getFlashBag()->add('error', 'Користувач з таким email вже існує');
+            return $this->redirectToRoute('user.list');
+        }
+
+        $user = $repo->findByLogin($data['login']);
+        if ($user !== null) {
+            $this->get('session')->getFlashBag()->add('error', 'Користувач з таким логіном вже існує');
+            return $this->redirectToRoute('user.list');
+        }
+        
+        $user = new User();
+        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+        $user->fillFormData($data, $encoder);
+
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('user.list');
+    }
+
+    /**
+     * @Route("/remove/{id}", name="user.remove")
+     * @param Request $request
+     * @param integer $id
+     * @return Response
+     */
+    public function remove(Request $request, $id) {
+
+        return $this->redirectToRoute('user.list');
+    }
+
+    /**
+     * @Route("/edit/{id}", name="user.edit")
+     * @param Request $request
+     * @param integer $id
+     * @return Response
+     */
+    public function edit(Request $request, $id) {
+
+        return $this->redirectToRoute('user.list');
     }
 }
