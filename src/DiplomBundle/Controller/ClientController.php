@@ -5,6 +5,8 @@ namespace DiplomBundle\Controller;
 use DiplomBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 /**
@@ -41,6 +43,7 @@ class ClientController extends Controller
         $client->setPhone($data['ipn']);
         $client->setAddress($data['birth']);
         $client->setImage($data['image']);
+        $client->setBirth(new \DateTime($data['birth']));
         $em = $this->getDoctrine()->getManager();
         $em->persist($client);
         $em->flush();
@@ -50,8 +53,18 @@ class ClientController extends Controller
     /**
      * @Route("/edit/{id}")
      */
-    public function editAction($id){
+    public function editAction($id, Request $request){
+        if($request->getMethod() == "POST"){
 
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $client = $em->getRepository('DiplomBundle:Client')->find($id);
+            $response = new Response(json_encode(array("result" => $client->toArray())));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+//            return new Response(json_encode($client->toArray()));
+        }
     }
 
     /**
