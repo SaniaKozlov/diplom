@@ -5,7 +5,7 @@
 			"url": "http://www.example.com/",
 			"class": "event-warning",
 			"start": "1465925755000",
-			"end":   "1466271355000"
+			"end":   "1466839800000"
 		},
 		{
 			"id": "256",
