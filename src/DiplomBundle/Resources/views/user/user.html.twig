@@ -1,0 +1,451 @@
+{% extends '@Diplom/layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link  rel="stylesheet" type="text/css" href="{{ asset('css/image-picker.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock %}
+
+    <div class="col-md-10 col-md-offset-1">
+        <h1>
+            Працівники
+            <span class="navbar-right">
+                <a href="#" data-toggle="modal" data-target="#modallAdd" data-whatever="@getbootstrap">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </span>
+        </h1>
+    </div>
+
+    <hr>
+
+    <div class="container bootstrap snippet">
+
+        <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Інформація про клієнта</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body inf-content">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1">
+                                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
+                                    <ul title="Ratings" class="list-inline ratings text-center">
+                                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-responsive table-user-information">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-user  text-primary"></span>
+                                                        Ім’я
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    Михайло
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                        Прізвище
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    Петров
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                        Дата народження
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    29.09.1993
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                                        Телефон
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    1234567890123
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                                        Логін
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    bootnipets
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                                        Email
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    noreply@email.com
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                                        Створено
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    20.06.2016
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                                        Змінено
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    20.06.2016 20:00:00
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" id="modallAdd" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Додати клієнта</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body inf-content">
+                            <div class="row">
+                                <form action="{{ path('diplom_client_add') }}" id="js-form-add">
+                                    <div class="col-md-6 ">
+                                        <select title="Select your surfboard" class="selectpicker image-picker show-html">
+                                            <option>Select...</option>
+                                            {% for key, image in images %}
+                                                <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="hidden" name="image" id="image">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed table-responsive table-user-information">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span class="glyphicon glyphicon-user  text-primary"></span>
+                                                            Ім’я
+                                                        </strong>
+                                                    </td>
+                                                    <td class="text-primary">
+                                                        <input class="form-control" type="text" name="name">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                            Прізвище
+                                                        </strong>
+                                                    </td>
+                                                    <td class="text-primary">
+                                                        <input class="form-control" type="text" name="lastname">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                            Дата народження
+                                                        </strong>
+                                                    </td>
+                                                    <td class="text-primary">
+                                                        <input class="form-control" type="text" name="birth">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                                            Телефон
+                                                        </strong>
+                                                    </td>
+                                                    <td class="text-primary">
+                                                        <input class="form-control" type="number" name="ipn">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                                            Логін
+                                                        </strong>
+                                                    </td>
+                                                    <td class="text-primary">
+                                                        <input class="form-control" type="text" name="login">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                                            Email
+                                                        </strong>
+                                                    </td>
+                                                    <td class="text-primary">
+                                                        <input class="form-control" type="email" name="email">
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="jsSubmit" class="btn btn-success" data-dismiss="modal">Зберегти</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                <tr>
+                                    <th><span>Ім’я</span></th>
+                                    <th><span>Дата створення</span></th>
+                                    <th class="text-center"><span>Посада</span></th>
+                                    <th><span>Email</span></th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>
+                                            <img src="{{ asset(user.getImage()) }}" class="img-circle width-80" alt="">
+                                            <a href="#" class="user-link">{{ user.getName() }}</a>
+                                            <span class="user-subhead">Member</span>
+                                        </td>
+                                        <td>{{ user.getCreateed()|date('d-m-Y') }}</td>
+                                        <td class="text-center">
+                                            <span class="label label-default">pending</span>
+                                        </td>
+                                        <td>
+                                            <a href="#">{{ user.getEmail() }}</a>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <a href="#" class="table-link" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                                                {#{{ path('diplom_client_edit', client.getId()) }}#}
+                                                <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                            <a href="javascript:void(0);" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                            <a href="javascript:void(0);" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('img/admin.jpg') }}" class="img-circle width-80" alt="">
+                                        <a href="#" class="user-link">Іванов Іван Іванович</a>
+                                        <span class="user-subhead"></span>
+                                    </td>
+                                    <td>2016/04/12</td>
+                                    <td class="text-center">
+                                        <span class="label label-default">Адміністратор</span>
+                                    </td>
+                                    <td>
+                                        <a href="#">ivanov.i@gmail.com</a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('img/worker.jpg') }}" class="img-circle width-80" alt="">
+                                        <a href="#" class="user-link">Петров Петро</a>
+                                        <span class="user-subhead"></span>
+                                    </td>
+                                    <td>2016/05/29</td>
+                                    <td class="text-center">
+                                        <span class="label label-success">Директор</span>
+                                    </td>
+                                    <td>
+                                        <a href="#">petrov.p@gmail.com</a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('img/worker_g.jpg') }}" class="img-circle width-80" alt="">
+                                        <a href="#" class="user-link">Іванова Ірина</a>
+                                        <span class="user-subhead"></span>
+                                    </td>
+                                    <td>2016/06/12</td>
+                                    <td class="text-center">
+                                        <span class="label label-danger">Заступник директора</span>
+                                    </td>
+                                    <td>
+                                        <a href="#">abc@brando.com</a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/image-picker.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#modallAdd').on('shown.bs.modal', function () {
+                    $('.selectpicker').imagepicker({
+                        hide_select : true,
+                        show_label  : false,
+                        selected: function(option){
+                            var value = this.val();
+                            $("#image").val(value);
+                        }
+                    });
+
+                });
+
+                $('#jsSubmit').on('click',function () {
+                    $('#js-form-add').submit();
+                })
+            });
+        </script>
+    {% endblock %}
+{% endblock %}
