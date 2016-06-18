@@ -21,7 +21,7 @@
     </div>
     <hr>
     <div class="container bootstrap snippet">
-        <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -32,7 +32,7 @@
                         <div class="panel-body inf-content">
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-1">
-                                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
+                                    <img alt="" id="avatarInfo" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" data-original-title="Usuario">
                                     <ul title="Ratings" class="list-inline ratings text-center">
                                         <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
                                         <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
@@ -53,7 +53,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    Михайло
+                                                    <input type="text" id="nameI" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -64,7 +64,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    Петров
+                                                    <input type="text" id="lastnameI" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -75,18 +75,18 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    29.09.1993
+                                                    <input type="text" id="birthI" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <strong>
                                                         <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                                        ІПН
+                                                        Телефон
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    1234567890123
+                                                    <input type="text" id="phoneI" disabled>
                                                 </td>
                                             </tr>
 
@@ -98,20 +98,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    bootnipets
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                                                        Роль
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    Клієнт
+                                                    <input type="text" id="loginI" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -122,7 +109,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    noreply@email.com
+                                                    <input type="text" id="emailI" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -133,7 +120,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    20.06.2016
+                                                    <input type="text" id="createdI" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -144,7 +131,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    20.06.2016 20:00:00
+                                                    <input type="text" id="updatedI" disabled>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -170,7 +157,7 @@
                     <div class="modal-body">
                         <div class="panel-body inf-content">
                             <div class="row">
-                                <form action="{{ path('diplom_client_add') }}" id="js-form-add">
+                                <form action="{{ path('diplom_client_add') }}" method="post" class="js-form">
                                     <div class="col-md-6 ">
                                         <select title="Select your surfboard" class="selectpicker image-picker show-html">
                                             <option>Select...</option>
@@ -273,7 +260,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="jsSubmit" class="btn btn-success" data-dismiss="modal">Зберегти</button>
+                        <button type="button" class="btn btn-success jsSubmit" data-dismiss="modal">Зберегти</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
                     </div>
                 </div>
@@ -284,20 +271,20 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">Додати клієнта</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">Редагувати клієнта</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body inf-content">
                             <div class="row">
-                                <form action="{{ path('diplom_client_add') }}" id="js-form-add">
+                                <form action="" method="post" id="form-edit" class="js-form">
                                     <div class="col-md-6 ">
-                                        <select title="Select your surfboard" id="image" class="selectpicker image-picker show-html">
+                                        <select title="Select your surfboard" id="imageS" class="selectpicker image-picker show-html">
                                             <option>Select...</option>
                                             {% for key, image in images%}
                                                 <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
                                             {% endfor %}
                                         </select>
-                                        <input type="hidden" name="image" id="image">
+                                        <input type="hidden" name="image" id="imageE">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
@@ -392,7 +379,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="jsSubmit" class="btn btn-success" data-dismiss="modal">Зберегти</button>
+                        <button type="button" class="btn btn-success jsSubmit" data-dismiss="modal">Зберегти</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
                     </div>
                 </div>
@@ -430,7 +417,7 @@
                                             <a href="#">{{ client.getEmail() }}</a>
                                         </td>
                                         <td style="width: 20%;">
-                                            <a href="#" class="table-link" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                                            <a href="#" class="table-link infoClient" data-id="{{ client.getId() }}">
                                                 {#{{ path('diplom_client_edit', client.getId()) }}#}
                                                 <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
@@ -443,7 +430,7 @@
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                             </span>
                                             </a>
-                                            <a href="#" class="table-link danger">
+                                            <a href="#" class="table-link danger removeClient" data-id="{{ client.getId() }}">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -483,13 +470,14 @@
                 })
             });
 
-            $('#jsSubmit').on('click',function () {
-                $('#js-form-add').submit();
-            })
+            $('.jsSubmit').on('click',function () {
+                $('.js-form').submit();
+            });
 
             $('.editClient').on('click', function () {
                 var id = $(this).attr('data-id');
                 var url = '/client/edit/'+id;
+                $('#form-edit').attr('action', url);
                 $.ajax({
                     method: "GET",
                     url: url
@@ -498,22 +486,66 @@
                             var result = response['result'];
                             $('#name').val(result.name);
                             $('#email').val(result.email);
-                            $('#image').val(result.image);
+                            $('#imageS').val(result.image);
+                            $('#imageE').val(result.image);
                             $('#birth').val(result.birth);
                             $('#lastname').val(result.lastname);
                             $('#phone').val(result.phone);
-
                             $('#modallEdit').modal();
-                            $('.selectpicker').imagepicker({
-                                hide_select : true,
-                                show_label  : false,
-                                selected: function(option){
-                                    var value = this.val();
-                                    $("#image").val(value);
-                                }
+                            $('#modallEdit').on('shown.bs.modal', function () {
+                                $('.selectpicker').imagepicker({
+                                    hide_select : true,
+                                    show_label  : false,
+                                    selected: function(option){
+                                        var value = this.val();
+                                        $("#image").val(value);
+                                    }
+                                });
+                                $('.selectpicker').data('picker').sync_picker_with_select();
                             });
                         });
-            })
+            });
+
+            $('.infoClient').on('click', function () {
+                 var id = $(this).attr('data-id');
+                 var url = '/client/info/'+id;
+                 $.ajax({
+                     method: "GET",
+                     url: url
+                 })
+                         .done(function( response ) {
+                             var result = response['result'];
+                             $('#nameI').val(result.name);
+                             $('#emailI').val(result.email);
+                             $('#avatarInfo').attr('src', '/'+result.image);
+                             $('#birthI').val(result.birth);
+                             $('#lastnameI').val(result.lastname);
+                             $('#phoneI').val(result.phone);
+                             $('#createdI').val(result.created);
+                             $('#updatedI').val(result.updated);
+                             $('#modalInfo').modal();
+                             $('#modalInfo').on('shown.bs.modal', function () {
+                                 $('.selectpicker').imagepicker({
+                                     hide_select : true,
+                                     show_label  : false,
+                                     selected: function(option){
+                                         var value = this.val();
+                                         $("#image").val(value);
+                                     }
+                                 });
+                                 $('.selectpicker').data('picker').sync_picker_with_select();
+                             });
+                         });
+            });
+
+            $('.removeClient').on('click', function () {
+                var id = $(this).attr('data-id');
+                var url = '/client/remove/'+id;
+                $.ajax({
+                    method: "GET",
+                    url: url
+                })
+            });
 
         </script>
     {% endblock %}
