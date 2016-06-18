@@ -178,6 +178,7 @@
                                                 <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
                                             {% endfor %}
                                         </select>
+                                        <input type="hidden" name="image" id="image">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
@@ -295,7 +296,43 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                {% for client in clients %}
+                                    <tr>
+                                        <td>
+                                            <img src="{{ asset(client.getImage()) }}" class="img-circle width-80" alt="">
+                                            <a href="#" class="user-link">{{ client.getName() }}</a>
+                                            <span class="user-subhead">Member</span>
+                                        </td>
+                                        <td>{{ client.getCreateed()|date('d-m-Y') }}</td>
+                                        <td class="text-center">
+                                            <span class="label label-default">pending</span>
+                                        </td>
+                                        <td>
+                                            <a href="#">{{ client.getEmail() }}</a>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <a href="#" class="table-link" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                                                {#{{ path('diplom_client_edit', client.getId()) }}#}
+                                                <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                            <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                            <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 <tr>
                                     <td>
                                         <img src="../img/users_pic/user_m3.png" class="img-circle width-80" alt="">
@@ -414,10 +451,18 @@
             $('#modallAdd').on('click', function () {
                     $('.selectpicker').imagepicker({
                         hide_select : true,
-                        show_label  : false
+                        show_label  : false,
+                        selected: function(option){
+                            var value = this.val();
+                            $("#image").val(value);
+                        }
                     });
 
             });
+
+            $('#jsSubmit').on('click',function () {
+                $('#js-form-add').submit();
+            })
 
         </script>
     {% endblock %}

@@ -42,12 +42,12 @@ class Client
      */
     private $updated;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="sale", type="integer")
-     */
-    private $sale;
+//    /**
+//     * @var int
+//     *
+//     * @ORM\Column(name="sale", type="integer")
+//     */
+//    private $sale;
 
     /**
      * @var string
@@ -70,7 +70,13 @@ class Client
      */
     private $email;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+    
     /**
      * Get id
      *
@@ -153,29 +159,29 @@ class Client
         return $this->updated;
     }
 
-    /**
-     * Set sale
-     *
-     * @param integer $sale
-     *
-     * @return Client
-     */
-    public function setSale($sale)
-    {
-        $this->sale = $sale;
-
-        return $this;
-    }
-
-    /**
-     * Get sale
-     *
-     * @return int
-     */
-    public function getSale()
-    {
-        return $this->sale;
-    }
+//    /**
+//     * Set sale
+//     *
+//     * @param integer $sale
+//     *
+//     * @return Client
+//     */
+//    public function setSale($sale)
+//    {
+//        $this->sale = $sale;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get sale
+//     *
+//     * @return int
+//     */
+//    public function getSale()
+//    {
+//        return $this->sale;
+//    }
 
     /**
      * Set address
@@ -247,5 +253,22 @@ class Client
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

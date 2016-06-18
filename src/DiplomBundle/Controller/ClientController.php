@@ -2,9 +2,11 @@
 
 namespace DiplomBundle\Controller;
 
+use DiplomBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Request;
 /**
  * @Route("/client")
  */
@@ -29,8 +31,20 @@ class ClientController extends Controller
     /**
      * @Route("/add")
      */
-    public function addAction(){
-        
+    public function addAction(Request $request){
+        $data = $request->query->all();
+        $client = new Client();
+        $client->setName($data['name'].' '.$data['lastname']);
+        $client->setCreateed(new \DateTime('now'));
+        $client->setUpdated(new \DateTime('now'));
+        $client->setEmail($data['email']);
+        $client->setPhone($data['ipn']);
+        $client->setAddress($data['birth']);
+        $client->setImage($data['image']);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($client);
+        $em->flush();
+        return $this->redirect($this->generateUrl('diplom_client_index'));
     }
 
     /**
