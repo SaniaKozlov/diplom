@@ -2,18 +2,22 @@
 
 namespace DiplomBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 /**
+ * @Security("has_role('ROLE_USER')")
  * @Route("/logger")
  */
 class LoggerController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/clients")
      */
-    public function indexAction($name)
+    public function getClients()
     {
-        return $this->render('', array('name' => $name));
+        // TODO: доклепати
+        // FIXME: доклепати
     }
 }

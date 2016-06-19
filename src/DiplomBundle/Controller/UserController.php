@@ -3,7 +3,6 @@
 namespace DiplomBundle\Controller;
 
 use DiplomBundle\Entity\User;
-use DiplomBundle\Exception\WrongDateException;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -48,6 +47,8 @@ class UserController extends Controller
      * @return Response
      */
     public function add(Request $request) {
+        /** @var User $myself */
+        $myself = $this->getUser();
         $em = $this->get('doctrine.orm.default_entity_manager');
         $repo = $em->getRepository('DiplomBundle:User');
         $data = $request->request->all();
@@ -71,6 +72,11 @@ class UserController extends Controller
         $em->persist($user);
         $em->flush();
 
+        $this->get('diplom.logger')->logEvent(
+            'Працівники',
+            sprintf('Користувач %s додав нового працівника %s', $myself->getUsername(), $user->getUsername())
+        );
+
         return $this->redirectToRoute('user.list');
     }
 
@@ -82,6 +88,8 @@ class UserController extends Controller
      */
     public function remove(Request $request, $id) {
         $em = $this->get('doctrine.orm.default_entity_manager');
+        /** @var User $myself */
+        $myself = $this->getUser();
 
         $user = $em->find('DiplomBundle:User', $id);
         if ($user === null) {
@@ -89,8 +97,14 @@ class UserController extends Controller
             return $this->redirectToRoute('user.list');
         }
 
+        $clone = clone $user;
         $em->remove($user);
         $em->flush();
+
+        $this->get('diplom.logger')->logEvent(
+            'Працівники',
+            sprintf('Користувач %s видалив працівника %s', $myself->getUsername(), $clone->getUsername())
+        );
 
         return $this->redirectToRoute('user.list');
     }
@@ -121,6 +135,9 @@ class UserController extends Controller
      * @return Response
      */
     public function editPOST(Request $request, $id) {
+        /** @var User $myself */
+        $myself = $this->getUser();
+
         $em = $this->get('doctrine.orm.default_entity_manager');
         $user = $em->find('DiplomBundle:User', $id);
         if ($user === null) {
@@ -134,6 +151,11 @@ class UserController extends Controller
 
         $em->persist($user);
         $em->flush();
+
+        $this->get('diplom.logger')->logEvent(
+            'Працівники',
+            sprintf('Користувач %s відредагував працівника %s', $myself->getUsername(), $user->getUsername())
+        );
         
         return $this->redirectToRoute('user.list');
     }
