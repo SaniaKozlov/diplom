@@ -4,11 +4,7 @@
     <link  rel="stylesheet" type="text/css" href="{{ asset('css/image-picker.css') }}">
 {% endblock %}
 
-{% block body %}
-    {% block header %}
-        {{ parent() }}
-    {% endblock %}
-
+{% block content %}
     <div class="col-md-10 col-md-offset-1">
         <h1>
             Клієнти
@@ -149,7 +145,7 @@
         </div>
         <div class="modal fade bs-example-modal-lg" id="modallAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
+                <form action="{{ path('client.add') }}" method="post" class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="exampleModalLabel">Додати клієнта</h4>
@@ -157,7 +153,7 @@
                     <div class="modal-body">
                         <div class="panel-body inf-content">
                             <div class="row">
-                                <form action="{{ path('diplom_client_add') }}" method="post" class="js-form">
+                                <div  class="js-form">
                                     <div class="col-md-6 ">
                                         <select title="Select your surfboard" class="selectpicker image-picker show-html">
                                             <option>Select...</option>
@@ -255,15 +251,15 @@
                                             </table>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success jsSubmit" data-dismiss="modal">Зберегти</button>
+                        <button type="submit" class="btn btn-success jsSubmit">Зберегти</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="modal fade bs-example-modal-lg" id="modallEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -430,7 +426,7 @@
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                             </span>
                                             </a>
-                                            <a href="#" class="table-link danger removeClient" data-id="{{ client.getId() }}">
+                                            <a href="{{ path('client.remove', {'id': client.getId()}) }}" class="table-link danger">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -465,14 +461,14 @@
 
                 });
 
-                $('#jsSubmit').on('click',function () {
-                    $('#js-form-add').submit();
-                })
+//                $('#jsSubmit').on('click',function () {
+//                    $('#js-form-add').submit();
+//                })
             });
 
-            $('.jsSubmit').on('click',function () {
-                $('.js-form').submit();
-            });
+//            $('.jsSubmit').on('click',function () {
+//                $('.js-form').submit();
+//            });
 
             $('.editClient').on('click', function () {
                 var id = $(this).attr('data-id');

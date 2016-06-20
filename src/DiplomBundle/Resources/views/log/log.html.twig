@@ -1,0 +1,91 @@
+{% extends '@Diplom/layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h1>
+                Логи
+                {#<span class="navbar-right">#}
+                    {#<a href="javascript:void(0);" data-toggle="modal" data-target="#modal-add">#}
+                        {#<i class="fa fa-plus"></i>#}
+                    {#</a>#}
+                {#</span>#}
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="table-responsive">
+                <!-- PROJECT TABLE -->
+                <table class="table colored-header datatable project-list">
+                    <thead>
+                    <tr>
+                        <th>Секція</th>
+                        <th>Дія</th>
+                        <th>Дата</th>
+                        <th>Час</th>
+                        {#<th>Користувач</th>#}
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for log in logs %}
+                        <tr>
+                            <td><a href="javascript:void(0);">{{ log.subject }}</a></td>
+                            <td><a href="javascript:void(0);"><i>{{ log.action }}</i></a></td>
+                            <td>{{ log.created | date('m-d-Y') }}</td>
+                            <td>{{ log.created | date('H:i:s') }}</td>
+                            {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                            <td><span class="label label-success">ОК</span></td>
+                        </tr>
+                    {% endfor %}
+                    {#<tr>#}
+                        {#<td><a href="#">Корпоративна розсилка</a></td>#}
+                        {#<td>9-06-2016</td>#}
+                        {#<td>11:18:10</td>#}
+                        {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                        {#<td><span class="label label-success">ОК</span></td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td><a href="#">Подію заплановано</a></td>#}
+                        {#<td>5-06-2016</td>#}
+                        {#<td>8:30:03</td>#}
+                        {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                        {#<td><span class="label label-success">ОК</span></td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td><a href="#">Клієнтська розсилка</a></td>#}
+                        {#<td>3-06-2016</td>#}
+                        {#<td>12:59:09</td>#}
+                        {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                        {#<td><span class="label label-success">ОК</span></td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td><a href="#">Подію заплановано</a></td>#}
+                        {#<td>1-06-2016</td>#}
+                        {#<td>11:30:10</td>#}
+                        {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                        {#<td><span class="label label-success">ОК</span></td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td><a href="#">Корпоративна розсилка</a></td>#}
+                        {#<td>22-05-2016</td>#}
+                        {#<td>8:10:19</td>#}
+                        {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                        {#<td><span class="label label-success">ОК</span></td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td><a href="#">Клієнтська розсилка</a></td>#}
+                        {#<td>21-05-2016</td>#}
+                        {#<td>10:15:29</td>#}
+                        {#<td><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>#}
+                        {#<td><span class="label label-success">ОК</span></td>#}
+                    {#</tr>#}
+                    </tbody>
+                </table>
+                <!-- END PROJECT TABLE -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

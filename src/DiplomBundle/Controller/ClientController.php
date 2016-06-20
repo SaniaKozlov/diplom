@@ -35,7 +35,7 @@ class ClientController extends Controller
     }
 
     /**
-     * @Route("/add")
+     * @Route("/add", name="client.add")
      * @param Request $request
      * @return Response
      */
@@ -43,7 +43,7 @@ class ClientController extends Controller
         /** @var User $myself */
         $myself = $this->getUser();
 
-        $data = $request->query->all();
+        $data = $request->request->all();
         $client = new Client();
         $client->setName($data['name'].' '.$data['lastname']);
         $client->setCreateed(new \DateTime('now'));
@@ -106,7 +106,7 @@ class ClientController extends Controller
     }
 
     /**
-     * @Route("/remove/{id}")
+     * @Route("/remove/{id}", name="client.remove")
      * @param integer $id
      * @return Response
      */
