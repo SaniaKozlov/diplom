@@ -42,7 +42,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="birthdate", type="datetime", nullable=false)
+     * @ORM\Column(name="birthdate", type="datetime", nullable=true)
      */
     private $birthdate;
 
@@ -61,14 +61,14 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     private $created;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated", type="datetime")
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     private $updated;
 

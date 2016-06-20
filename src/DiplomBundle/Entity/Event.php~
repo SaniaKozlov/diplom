@@ -164,10 +164,10 @@ class Event
     public function toArray(){
         return [
             'id' => $this->getId(),
-            'name' => $this->getName(),
+            'title' => $this->getName(),
             'class' => $this->getClass(),
-            'date_start' => $this->getDateStart(),
-            'date_end' => $this->getDateEnd()
+            'start' => strtotime($this->getDateStart()->format('d-m-Y h:i:s')) * 1000,
+            'end' => strtotime($this->getDateEnd()->format('d-m-Y h:i:s')) * 1000
         ];
     }
 }

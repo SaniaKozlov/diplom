@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 	192.168.0.3
+    database_port: 3306
+    database_name: diplom
+    database_user: andrea
+    database_password: aw7QFKDx
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 0e201c816c7fb87dca37f3f9660bb792a4f373d4

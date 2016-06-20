@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Security("has_role('ROLE_USER')")
  * @Route("/user")
  */
 class UserController extends Controller
