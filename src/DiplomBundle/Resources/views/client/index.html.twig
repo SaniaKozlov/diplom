@@ -156,13 +156,13 @@
                             <div class="row">
                                 <div  class="js-form">
                                     <div class="col-md-6 ">
-                                        <select title="Select your surfboard" class="selectpicker image-picker show-html">
+                                        <select title="Select your surfboard" name="image" class="selectpicker image-picker show-html">
                                             <option>Select...</option>
                                             {% for key, image in images%}
                                                 <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
                                             {% endfor %}
                                         </select>
-                                        <input type="hidden" name="image" id="image">
+                                        {#<input type="hidden" name="image" id="image">#}
                                     </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
@@ -198,14 +198,14 @@
                                                         </strong>
                                                     </td>
                                                     <td class="text-primary">
-                                                        <input class="form-control" type="text" name="birth">
+                                                        <input class="form-control date-picker" type="text" name="birth">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <strong>
                                                             <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                                            ІПН
+                                                            Телефон
                                                         </strong>
                                                     </td>
                                                     <td class="text-primary">
@@ -265,7 +265,7 @@
         </div>
         <div class="modal fade bs-example-modal-lg" id="modallEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
+                <form action="" method="post" id="form-edit"  class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="exampleModalLabel">Редагувати клієнта</h4>
@@ -273,15 +273,15 @@
                     <div class="modal-body">
                         <div class="panel-body inf-content">
                             <div class="row">
-                                <form action="" method="post" id="form-edit" class="js-form">
+                                <div class="js-form">
                                     <div class="col-md-6 ">
-                                        <select title="Select your surfboard" id="imageS" class="selectpicker image-picker show-html">
+                                        <select title="Select your surfboard" id="imageS" class="selectpicker image-picker show-html" name="image">
                                             <option>Select...</option>
                                             {% for key, image in images%}
                                                 <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
                                             {% endfor %}
                                         </select>
-                                        <input type="hidden" name="image" id="imageE">
+                                        {#<input type="hidden" name="image" id="imageE">#}
                                     </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
@@ -317,7 +317,7 @@
                                                         </strong>
                                                     </td>
                                                     <td class="text-primary">
-                                                        <input class="form-control" type="text" id="birth" name="birth">
+                                                        <input class="form-control date-picker" type="text" id="birth" name="birth">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -371,15 +371,15 @@
                                             </table>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success jsSubmit" data-dismiss="modal">Зберегти</button>
+                        <button type="submit" class="btn btn-success">Зберегти</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -451,6 +451,7 @@
         <script>
             $(document).ready(function () {
                 $('#modallAdd').on('shown.bs.modal', function () {
+                    $(this).find('.date-picker').datepicker();
                     $('.selectpicker').imagepicker({
                         hide_select : true,
                         show_label  : false,
@@ -484,12 +485,13 @@
                             $('#name').val(result.name);
                             $('#email').val(result.email);
                             $('#imageS').val(result.image);
-                            $('#imageE').val(result.image);
+//                            $('#imageE').val(result.image);
                             $('#birth').val(result.birth);
                             $('#lastname').val(result.lastname);
                             $('#phone').val(result.phone);
                             $('#modallEdit').modal();
                             $('#modallEdit').on('shown.bs.modal', function () {
+                                $(this).find('.date-picker').datepicker();
                                 $('.selectpicker').imagepicker({
                                     hide_select : true,
                                     show_label  : false,
