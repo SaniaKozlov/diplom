@@ -13,11 +13,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class LoggerController extends Controller
 {
     /**
-     * @Route("/clients")
+     * @Route("/", name="logger.show")
      */
-    public function getClients()
-    {
-        // TODO: доклепати
-        // FIXME: доклепати
+    public function getClients() {
+        $em = $this->get('doctrine.orm.default_entity_manager');
+
+        $logs = $em->getRepository('DiplomBundle:Log')->findAll();
+
+        return $this->render('@Diplom/log/log.html.twig', [
+            'logs' => $logs
+        ]);
     }
 }
