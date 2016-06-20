@@ -118,8 +118,14 @@
         <script src="{{ asset('bootstrap/underscore/underscore-min.js') }}"></script>
         <script src="{{ asset('bootstrap/bootstrap-calendar/js/calendar.js') }}"></script>
         <script src="{{ asset('bootstrap/bootstrap-calendar/js/language/ru-RU.js') }}"></script>
+
         <script>
             $(document).ready(function () {
+
+                $('#modallAdd').on('shown.bs.modal', function () {
+                    $(this).find('.date-picker').datepicker();
+                });
+
                 var JSON = [];
                 $.ajax({
                     method: "GET",
