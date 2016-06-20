@@ -168,7 +168,7 @@
                                                 <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
                                             {% endfor %}
                                         </select>
-                                        <input type="hidden" name="image" id="image">
+                                        <input type="hidden" name="image" id="image-add">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
@@ -286,7 +286,7 @@
                                                 <option data-img-src="{{ asset(image) }}" value="{{ image }}">{{ key }}</option>
                                             {% endfor %}
                                         </select>
-                                        <input type="hidden" name="image" id="image">
+                                        <input type="hidden" name="image" id="image-edit">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
@@ -521,7 +521,7 @@
                 show_label  : false,
                 selected: function(option){
                     var value = this.val();
-                    $("#image").val(value);
+                    $("#image-add").val(value);
                 }
             });
 
@@ -534,7 +534,7 @@
                 show_label  : false,
                 selected: function(option){
                     var value = this.val();
-                    $("#image").val(value);
+                    $("#image-edit").val(value);
                 }
             });
 

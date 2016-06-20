@@ -30,13 +30,13 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
-     * @ORM\Column(name="surname", type="string", length=255)
+     * @ORM\Column(name="surname", type="string", length=255, nullable=true)
      */
     private $surname;
 
@@ -48,13 +48,13 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
-     * @ORM\Column(name="image", type="string", length=1024)
+     * @ORM\Column(name="image", type="string", length=1024, nullable=true)
      */
     private $image;
 
@@ -131,7 +131,6 @@ class User extends BaseUser
             'image'   => $this->getImage(),
         ];
     }
-
 
 
     /**
