@@ -31,16 +31,23 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="topicid", type="integer")
+     * @ORM\Column(name="reciver", type="string")
      */
-    private $topicid;
+    private $reciver;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="string", length=255)
+     * @ORM\Column(name="message", type="string", length=1024)
      */
     private $message;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="theme", type="string", length=255)
+     */
+    private $theme;
 
     /**
      * @var \DateTime
@@ -82,30 +89,6 @@ class Mail
     public function getUserid()
     {
         return $this->userid;
-    }
-
-    /**
-     * Set topicid
-     *
-     * @param integer $topicid
-     *
-     * @return Mail
-     */
-    public function setTopicid($topicid)
-    {
-        $this->topicid = $topicid;
-
-        return $this;
-    }
-
-    /**
-     * Get topicid
-     *
-     * @return int
-     */
-    public function getTopicid()
-    {
-        return $this->topicid;
     }
 
     /**
@@ -154,5 +137,53 @@ class Mail
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set to
+     *
+     * @param string $to
+     *
+     * @return Mail
+     */
+    public function setReciver($reciver)
+    {
+        $this->reciver = $reciver;
+
+        return $this;
+    }
+
+    /**
+     * Get to
+     *
+     * @return string
+     */
+    public function getReciver()
+    {
+        return $this->reciver;
+    }
+
+    /**
+     * Set theme
+     *
+     * @param string $theme
+     *
+     * @return Mail
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return string
+     */
+    public function getTheme()
+    {
+        return $this->theme;
     }
 }

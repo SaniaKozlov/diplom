@@ -18,7 +18,7 @@ class LoggerController extends Controller
     public function getClients() {
         $em = $this->get('doctrine.orm.default_entity_manager');
 
-        $logs = $em->getRepository('DiplomBundle:Log')->findAll();
+        $logs = $em->getRepository('DiplomBundle:Log')->findBy([],['created'=>'DESC']);
 
         return $this->render('@Diplom/log/log.html.twig', [
             'logs' => $logs
