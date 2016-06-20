@@ -12,8 +12,9 @@ class SenderController extends Controller
     /**
      * @Route("/")
      */
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('', array('name' => $name));
+        
+        return $this->render('@Diplom/sender/sender.html.twig');
     }
 }

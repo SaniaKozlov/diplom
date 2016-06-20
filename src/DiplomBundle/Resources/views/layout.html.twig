@@ -8,6 +8,7 @@
         <link  rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.css') }}">
         <link  rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}">
         <link  rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.css') }}">
+        <link  rel="stylesheet" type="text/css" href="{{ asset('/css/sender.css') }}">
     {% endblock %}
 </head>
 <body>
@@ -31,7 +32,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ path('diplom_client_index') }}">Клієнти</a></li>
                         <li><a href="{{ path('user.list') }}">Працівники</a></li>
-                        {#<li><a href="{{ path('diplom_sender_index') }}">Розсилання</a></li>#}
+                        <li><a href="{{ path('diplom_sender_index') }}">Розсилання</a></li>
                         <li><a href="{{ path('logger.show') }}">Логи</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

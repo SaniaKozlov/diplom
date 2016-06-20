@@ -1,4 +1,5 @@
 /app/config/parameters.yml
+/app/config/parameters.yml.dist
 /build/
 /phpunit.xml
 /var/*
@@ -16,3 +17,7 @@
 /web/bundles/
 .idea/
 
+src/DiplomBundle/Resources/views/logger/
+var/cache/
+var/logs/
+var/sessions/
