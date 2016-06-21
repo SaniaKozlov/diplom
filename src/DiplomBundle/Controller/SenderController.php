@@ -65,8 +65,10 @@ class SenderController extends Controller
      * @Route("/long", name="sender.long")
      */
     public function longSendAction(){
+        set_time_limit(0);
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('DiplomBundle:User')->findAll();
+        $users = $em->getRepository('DiplomBundle:User')->findBy([],null, 500);
+        $username = $this->getUser()->getUsername();
         $time_start = microtime(true);
         foreach ($users as $user) {
             $mail = new Mail();
@@ -76,25 +78,28 @@ class SenderController extends Controller
             $mail->setTheme('test theme');
             $mail->setReciver($user->getUsername());
             $em->persist($mail);
-            sleep(2);
+            usleep(75);
             $em->flush();
             $this->get('diplom.logger')->logEvent(
                 'Розсилка',
-                sprintf('Користувач %s виконав розсилання для %s', $this->getUser()->getUsername(), $user->getUsername())
+                sprintf('Користувач %s виконав розсилання для %s', $username, $user->getUsername())
             );
         }
         $time_end = microtime(true);
         $time = $time_end - $time_start;
-        return $this->render('@Diplom/sender/time.html.twig', ['s' => 'прямим виконанням', 'time' => round($time*1000,4), 'count' => count($users)]);
+        set_time_limit(60);
+        return $this->render('@Diplom/sender/time.html.twig', ['s' => 'прямим виконанням', 'time' => round($time*1000,4)]);
     }
 
     /**
      * @Route("/quiq", name="sender.quiq")
      */
     public function quiqSendAction(){
+        set_time_limit(0);
         $time_start = microtime(true);
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('DiplomBundle:User')->findAll();
+        $users = $em->getRepository('DiplomBundle:User')->findBy([],null, 500);
+        $username = $this->getUser()->getUsername();
         foreach ($users as $user) {
             $mail = new Mail();
             $mail->setCreated(new \DateTime('now'));
@@ -103,14 +108,16 @@ class SenderController extends Controller
             $mail->setTheme('test theme');
             $mail->setReciver($user->getUsername());
             $em->persist($mail);
-            $em->flush();
             $this->get('diplom.logger')->logEvent(
                 'Розсилка',
-                sprintf('Користувач %s виконав розсилання для %s', $this->getUser()->getUsername(), $user->getUsername())
+                sprintf('Користувач %s виконав розсилання для %s', $username, $user->getUsername())
             );
         }
         $time_end = microtime(true);
+        $em->flush();
+
         $time = $time_end - $time_start;
-        return $this->render('@Diplom/sender/time.html.twig', ['s' => 'паралельним виконанням', 'time' => round($time*1000,4), 'count' => count($users)]);
+        set_time_limit(60);
+        return $this->render('@Diplom/sender/time.html.twig', ['s' => 'паралельним виконанням', 'time' => round($time*1000,4)]);
     }
 }

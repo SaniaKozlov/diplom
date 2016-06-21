@@ -32,10 +32,15 @@ class UserController extends Controller
 
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('DiplomBundle:User')->findBy([], null, 100);
+//        $users = $em->getRepository('DiplomBundle:User')->findBy([]);
+        $query = $em->createQueryBuilder()
+            ->select('u')
+            ->from('DiplomBundle:User', 'u')
+            ->getQuery();
         $paginator  = $this->get('knp_paginator');
+
         $pagination = $paginator->paginate(
-            $users, /* query NOT result */
+            $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             10/*limit per page*/
         );
