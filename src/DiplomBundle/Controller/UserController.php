@@ -21,7 +21,7 @@ class UserController extends Controller
     /**
      * @Route("/", name="user.list")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $finder = new Finder();
         $finder->files()->in(realpath($this->get('kernel')->getRootDir() . '/../web/img/users_pic'));
@@ -33,10 +33,15 @@ class UserController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('DiplomBundle:User')->findBy([], null, 100);
-
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $users, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
         return $this->render("@Diplom/user/user.html.twig", [
             'images' => $images,
-            'users'  => $users
+            'users'  => $pagination
         ]);
     }
 

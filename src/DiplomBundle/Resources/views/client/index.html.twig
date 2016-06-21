@@ -388,6 +388,9 @@
                 <div class="main-box no-header clearfix">
                     <div class="main-box-body clearfix">
                         <div class="table-responsive">
+                            <div class="count">
+                                Всьго: {{ clients.getTotalItemCount }}
+                            </div>
                             <table class="table user-list">
                                 <thead>
                                 <tr>
@@ -438,6 +441,9 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            <div class="navigation">
+                                {{ knp_pagination_render(clients) }}
+                            </div>
                         </div>
                     </div>
                 </div>

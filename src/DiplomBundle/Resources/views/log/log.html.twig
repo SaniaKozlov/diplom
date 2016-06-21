@@ -18,6 +18,9 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="table-responsive">
                 <!-- PROJECT TABLE -->
+                <div class="count">
+                    Всьго: {{ logs.getTotalItemCount }}
+                </div>
                 <table class="table colored-header datatable project-list">
                     <thead>
                     <tr>
@@ -85,6 +88,9 @@
                     </tbody>
                 </table>
                 <!-- END PROJECT TABLE -->
+                <div class="navigation">
+                    {{ knp_pagination_render(logs) }}
+                </div>
             </div>
         </div>
     </div>

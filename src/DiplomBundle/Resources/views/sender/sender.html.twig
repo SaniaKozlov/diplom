@@ -79,7 +79,9 @@
                             <h1 class="content-title">Відправлені</h1>
 
                             {#<input type="search" placeholder="Search Mail" class="form-control mail-search" />#}
-
+                            <div class="count">
+                                Всьго: {{ mails.getTotalItemCount }}
+                            </div>
                             <ul class="mail-list">
                                 {% for mail in mails%}
                                 <li>
@@ -97,6 +99,9 @@
                                 </li>
                                 {% endfor %}
                             </ul>
+                            <div class="navigation">
+                                {{ knp_pagination_render(mails) }}
+                            </div>
                         </div>
                     </div>
                 </div>

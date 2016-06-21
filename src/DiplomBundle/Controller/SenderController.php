@@ -15,11 +15,17 @@ class SenderController extends Controller
     /**
      * @Route("/")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $mails = $em->getRepository('DiplomBundle:Mail')->findBy([],['created' => 'DESC']);
-        return $this->render('@Diplom/sender/sender.html.twig', ['mails' => $mails]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $mails, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+        return $this->render('@Diplom/sender/sender.html.twig', ['mails' => $pagination]);
     }
 
     /**
@@ -53,5 +59,58 @@ class SenderController extends Controller
             sprintf('Користувач %s виконав розсилання для %s', $this->getUser()->getUsername(), $str)
         );
         return $this->redirect('/sender', 301);
+    }
+
+    /**
+     * @Route("/long", name="sender.long")
+     */
+    public function longSendAction(){
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('DiplomBundle:User')->findAll();
+        $time_start = microtime(true);
+        foreach ($users as $user) {
+            $mail = new Mail();
+            $mail->setCreated(new \DateTime('now'));
+            $mail->setMessage('test');
+            $mail->setUserid(1);
+            $mail->setTheme('test theme');
+            $mail->setReciver($user->getUsername());
+            $em->persist($mail);
+            sleep(2);
+            $em->flush();
+            $this->get('diplom.logger')->logEvent(
+                'Розсилка',
+                sprintf('Користувач %s виконав розсилання для %s', $this->getUser()->getUsername(), $user->getUsername())
+            );
+        }
+        $time_end = microtime(true);
+        $time = $time_end - $time_start;
+        return $this->render('@Diplom/sender/time.html.twig', ['s' => 'прямим виконанням', 'time' => round($time*1000,4), 'count' => count($users)]);
+    }
+
+    /**
+     * @Route("/quiq", name="sender.quiq")
+     */
+    public function quiqSendAction(){
+        $time_start = microtime(true);
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('DiplomBundle:User')->findAll();
+        foreach ($users as $user) {
+            $mail = new Mail();
+            $mail->setCreated(new \DateTime('now'));
+            $mail->setMessage('test');
+            $mail->setUserid(1);
+            $mail->setTheme('test theme');
+            $mail->setReciver($user->getUsername());
+            $em->persist($mail);
+            $em->flush();
+            $this->get('diplom.logger')->logEvent(
+                'Розсилка',
+                sprintf('Користувач %s виконав розсилання для %s', $this->getUser()->getUsername(), $user->getUsername())
+            );
+        }
+        $time_end = microtime(true);
+        $time = $time_end - $time_start;
+        return $this->render('@Diplom/sender/time.html.twig', ['s' => 'паралельним виконанням', 'time' => round($time*1000,4), 'count' => count($users)]);
     }
 }

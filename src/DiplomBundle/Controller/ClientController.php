@@ -21,7 +21,7 @@ class ClientController extends Controller
      * @Route("/")
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $finder = new Finder();
         $finder->files()->in(realpath($this->get('kernel')->getRootDir() . '/../web/img/users_pic'));
@@ -31,7 +31,13 @@ class ClientController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         $clients = $em->getRepository('DiplomBundle:Client')->findAll();
-        return $this->render('@Diplom/client/index.html.twig', array('clients' => $clients, 'images' => $images));
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $clients, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+        return $this->render('@Diplom/client/index.html.twig', array('clients' => $pagination, 'images' => $images));
     }
 
     /**

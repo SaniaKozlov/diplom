@@ -34,6 +34,13 @@
                         <li><a href="{{ path('user.list') }}">Працівники</a></li>
                         <li><a href="{{ path('diplom_sender_index') }}">Розсилання</a></li>
                         <li><a href="{{ path('logger.show') }}">Логи</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" >Тести</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('sender.long') }}">Пряме виконання</a> </li>
+                                <li><a href="{{ path('sender.quiq') }}">Паралельне виконання</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
